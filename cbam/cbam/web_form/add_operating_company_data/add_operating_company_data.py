@@ -19,5 +19,5 @@ def get_country_codes():
 def setup_new_employee(email):
 	supplier = frappe.db.get_value("Supplier Employee Item", {"employee_email": frappe.session.user}, "parent")
 	doc = frappe.get_doc("CBAM Operating Company", {"email":email, "parent_supplier": supplier})
-	doc._create_new_employee()
+	# doc._create_new_employee()
 	doc.save()

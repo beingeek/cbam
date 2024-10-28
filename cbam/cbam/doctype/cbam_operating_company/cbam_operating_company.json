@@ -16,18 +16,12 @@
   "column_break_tngk",
   "country_of_establishment",
   "country_code",
-  "section_break_qaxm",
-  "html_information",
-  "select_contact_person",
   "contact_person_energy_manager_emissions_manager_section",
-  "contact_person_employee",
-  "first_name",
   "last_name",
-  "full_name",
+  "first_name",
   "column_break_mtjt",
   "email",
   "phone_number",
-  "position_in_the_company",
   "base_information_of_installation_section",
   "installations"
  ],
@@ -83,18 +77,11 @@
    "label": "Contact person (Energy manager, Emissions manager)"
   },
   {
-   "fetch_from": "supplier_employee.last_name",
-   "fieldname": "full_name",
-   "fieldtype": "Data",
-   "label": "Full Name (NOT WORKING YET)",
-   "read_only": 1
-  },
-  {
    "fetch_from": "contact_person_employee.last_name",
    "fieldname": "last_name",
    "fieldtype": "Data",
    "label": "Last Name",
-   "read_only": 1
+   "reqd": 1
   },
   {
    "fieldname": "column_break_mtjt",
@@ -105,21 +92,14 @@
    "fieldname": "email",
    "fieldtype": "Data",
    "label": "Email",
-   "read_only": 1
+   "reqd": 1
   },
   {
    "fetch_from": "contact_person_employee.phone_number",
    "fieldname": "phone_number",
-   "fieldtype": "Data",
+   "fieldtype": "Phone",
    "label": "Phone Number",
-   "read_only": 1
-  },
-  {
-   "fetch_from": "contact_person_employee.position",
-   "fieldname": "position_in_the_company",
-   "fieldtype": "Data",
-   "label": "Position in the Company",
-   "read_only": 1
+   "reqd": 1
   },
   {
    "fieldname": "uuid",
@@ -140,37 +120,11 @@
    "label": "Base information of installation"
   },
   {
-   "fieldname": "section_break_qaxm",
-   "fieldtype": "Section Break"
-  },
-  {
-   "fieldname": "html_information",
-   "fieldtype": "HTML",
-   "label": "HTML Information",
-   "options": "<p>Please provide contact details of a person on this installation level if it it is not you.</p>"
-  },
-  {
-   "description": "Only for Suppliers",
-   "fieldname": "select_contact_person",
-   "fieldtype": "Select",
-   "label": "Select contact person",
-   "options": "I am the contact person\nDifferent contact person",
-   "permlevel": 2
-  },
-  {
-   "fieldname": "contact_person_employee",
-   "fieldtype": "Link",
-   "label": "Contact Person Employee",
-   "mandatory_depends_on": "eval:doc.select_contact_person=='Different contact person'",
-   "options": "Supplier Employee",
-   "read_only_depends_on": "eval:doc.select_contact_person=='I am the contact person'"
-  },
-  {
    "fetch_from": "contact_person_employee.first_name",
    "fieldname": "first_name",
    "fieldtype": "Data",
    "label": "First Name",
-   "read_only": 1
+   "reqd": 1
   },
   {
    "fieldname": "column_break_ohlj",
@@ -187,7 +141,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-10-24 10:00:09.427689",
+ "modified": "2024-10-28 11:06:19.715519",
  "modified_by": "Administrator",
  "module": "CBAM",
  "name": "CBAM Operating Company",

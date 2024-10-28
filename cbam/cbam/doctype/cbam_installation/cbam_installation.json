@@ -21,7 +21,6 @@
   "html_information_contact_person",
   "contact_person",
   "contact_person_same_section",
-  "supplier_employee",
   "first_name_same",
   "last_name_same",
   "position_same",
@@ -65,13 +64,6 @@
    "label": "Country Code",
    "options": "Country Code",
    "reqd": 1
-  },
-  {
-   "fieldname": "supplier_employee",
-   "fieldtype": "Link",
-   "hidden": 1,
-   "label": "Supplier Employee (WILL BE FETCHED)",
-   "options": "Supplier Employee"
   },
   {
    "fieldname": "first_name",
@@ -153,7 +145,7 @@
   {
    "fetch_from": "supplier_employee.phone_number",
    "fieldname": "phone_number_same",
-   "fieldtype": "Data",
+   "fieldtype": "Phone",
    "label": "Phone Number",
    "read_only": 1
   },
@@ -285,7 +277,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-10-24 10:33:11.767975",
+ "modified": "2024-10-28 11:08:04.990189",
  "modified_by": "Administrator",
  "module": "CBAM",
  "name": "CBAM Installation",
