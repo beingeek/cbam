@@ -42,6 +42,8 @@ class CBAMInstallation(Document):
 				self.last_name_same = ""
 				self.email_same = ""
 				self.phone_number_same = ""
+			elif self.contact_person == "No contact person for this Installation":
+				pass
 			else:
 				frappe.throw("Please select a valid contact person option")
 
