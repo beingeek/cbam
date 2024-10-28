@@ -18,9 +18,11 @@ def create_new_supplier_user(employee):
             new_user.append("roles", {
                 'role': 'Supplier'
             })
-      
+
             new_user.save(ignore_permissions=True)
-            frappe.db.set_value("Supplier Employee", employee_doc.name, "Status", "Sent to Supplier Employee")
+            frappe.db.set_value("Supplier Employee", employee_doc.name, "status", "Sent to Supplier Employee")
+            frappe.db.set_value("Supplier Employee", employee_doc.name, "owner", employee_doc.email)
+            frappe.db.set_value("Supplier", employee_doc.supplier_company, "owner", employee_doc.email)
         except Exception as e:
             frappe.log_error(frappe.get_traceback(), f"An error occured while creating user for {employee_doc.name}")
-       
+
