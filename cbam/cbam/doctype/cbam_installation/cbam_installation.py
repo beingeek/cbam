@@ -25,7 +25,7 @@ class CBAMInstallation(Document):
 
 	def generated_uuid(self):
 
-		self.uuid_installation =cstr(uuid.uuid4()) 
+		self.uuid_installation =cstr(uuid.uuid4())
 
 	def add_same_contact_person(self):
 		has_contact_person_changed = self.has_value_changed("contact_person")
@@ -37,13 +37,13 @@ class CBAMInstallation(Document):
 				self.last_name_same = operating_company.last_name
 				self.email_same = operating_company.email
 				self.phone_number_same = operating_company.phone_number
-				self.position_same = operating_company.position_in_the_company
 			elif self.contact_person == "Different contact person":
 				self.first_name_same = ""
 				self.last_name_same = ""
 				self.email_same = ""
 				self.phone_number_same = ""
-				self.position_same = ""
+			elif self.contact_person == "No contact person for this Installation":
+				pass
 			else:
 				frappe.throw("Please select a valid contact person option")
 

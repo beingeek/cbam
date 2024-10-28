@@ -1,6 +1,7 @@
 import frappe
 from cbam.send_email.create_email import create_email
 from cbam.send_email.create_new_supplier_user import create_new_supplier_user
+from cbam.send_email.update_good_item import update_good_items
 from frappe.core.doctype.communication.email import make
 import json
 
@@ -15,6 +16,7 @@ def send_email(good):
         frappe.db.set_value("Supplier Employee", employee, "status", "Sent to Supplier Employee")
         for good in supplier_doc.goods:
             frappe.db.set_value('Good', good.good_number, 'status', 'Sent for completing')
+            update_good_items(good.good_number, supplier, employee)
         is_employee_main_contact = frappe.db.get_value('Supplier Employee', employee, 'is_main_contact')
         if is_employee_main_contact:
             frappe.db.set_value('Supplier', supplier, 'status', "Sent for confirmation")
