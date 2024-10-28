@@ -42,7 +42,6 @@ class CBAMInstallation(Document):
 				self.last_name_same = ""
 				self.email_same = ""
 				self.phone_number_same = ""
-				self.position_same = ""
 			else:
 				frappe.throw("Please select a valid contact person option")
 

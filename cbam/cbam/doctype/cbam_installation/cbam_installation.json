@@ -23,14 +23,12 @@
   "contact_person_same_section",
   "first_name_same",
   "last_name_same",
-  "position_same",
   "column_break_osbo",
   "email_same",
   "phone_number_same",
   "contact_person_section",
   "first_name",
   "last_name",
-  "position",
   "column_break_rjxu",
   "email",
   "phone_number",
@@ -68,32 +66,23 @@
   {
    "fieldname": "first_name",
    "fieldtype": "Data",
-   "label": "First Name",
-   "mandatory_depends_on": "eval:doc.contact_person=='Different contact person'"
+   "label": "First Name"
   },
   {
    "fieldname": "last_name",
    "fieldtype": "Data",
-   "label": "Last Name",
-   "mandatory_depends_on": "eval:doc.contact_person=='Different contact person'"
+   "label": "Last Name"
   },
   {
    "fieldname": "email",
    "fieldtype": "Data",
    "label": "Email",
-   "mandatory_depends_on": "eval:doc.contact_person=='Different contact person'",
    "options": "Email"
   },
   {
    "fieldname": "phone_number",
    "fieldtype": "Phone",
    "label": "Phone Number"
-  },
-  {
-   "fieldname": "position",
-   "fieldtype": "Data",
-   "label": "Position",
-   "mandatory_depends_on": "eval:doc.contact_person=='Different contact person'"
   },
   {
    "depends_on": "eval:doc.contact_person=='Different contact person'",
@@ -126,13 +115,6 @@
    "fieldname": "last_name_same",
    "fieldtype": "Data",
    "label": "Last Name",
-   "read_only": 1
-  },
-  {
-   "fetch_from": "supplier_employee.position",
-   "fieldname": "position_same",
-   "fieldtype": "Data",
-   "label": "Position",
    "read_only": 1
   },
   {
@@ -277,7 +259,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-10-28 11:08:04.990189",
+ "modified": "2024-10-28 12:55:52.701922",
  "modified_by": "Administrator",
  "module": "CBAM",
  "name": "CBAM Installation",
