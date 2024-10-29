@@ -10,6 +10,7 @@
   "emission_data_submission_details_section",
   "tier_n1_unregistered_template",
   "tier_n1_registered_template",
+  "supplier_good_rejection_notification_template",
   "column_break_tiem",
   "tier_1_unregistered_employee_template",
   "tier_1_registered_employee_template"
@@ -66,12 +67,20 @@
    "fieldtype": "Link",
    "label": "Admin Role",
    "options": "Role"
+  },
+  {
+   "default": "Supplier Good Rejection Notification Template",
+   "description": "This Email Template will be used to notify the owner of good in case a good is rejected by the supplier. ",
+   "fieldname": "supplier_good_rejection_notification_template",
+   "fieldtype": "Link",
+   "label": "Supplier Good Rejection Notification Template",
+   "options": "Notification"
   }
  ],
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2024-10-29 15:19:14.582531",
+ "modified": "2024-10-29 15:59:18.035120",
  "modified_by": "Administrator",
  "module": "CBAM",
  "name": "CBAM Settings",
