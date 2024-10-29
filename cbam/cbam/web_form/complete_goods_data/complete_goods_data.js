@@ -18,6 +18,7 @@ frappe.ready(function() {
 						frappe.web_form.fields_dict["responsible_employee_3"]._data = r.message.employeeOptions;
 						frappe.web_form.fields_dict["responsible_employee_4"]._data = r.message.employeeOptions;
 						frappe.web_form.fields_dict["responsible_employee_5"]._data = r.message.employeeOptions;
+						frappe.web_form.fields_dict["forward_to_employee"]._data = r.message.employeeOptions;
 					}
 				}
 			});
@@ -38,6 +39,7 @@ frappe.ready(function() {
 							frappe.web_form.fields_dict["responsible_supplier_3"]._data = r.message.supplier_options;
 							frappe.web_form.fields_dict["responsible_supplier_4"]._data = r.message.supplier_options;
 							frappe.web_form.fields_dict["responsible_supplier_5"]._data = r.message.supplier_options;
+							frappe.web_form.fields_dict["forward_to_supplier"]._data = r.message.supplier_options;
 						}
 					}
 				});

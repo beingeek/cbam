@@ -5,6 +5,13 @@ app_description = "Handling The EU\'s Carbon Border Adjustment Mechanism (CBABAM
 app_email = "wolfram.schmidt@phamos.eu"
 app_license = "mit"
 
+
+
+
+#update boot context
+boot_session = "cbam.boot.update_boot_context"
+
+
 # Apps
 # ------------------
 
@@ -276,7 +283,8 @@ fixtures = [
                 "Tier n+1 Unregistered Supplier Template",
                 "Tier n+1 Registered Supplier Template",
                 "Tier 1 Unregistered Employee Template",
-                "Tier 1 Registered Employee Template"
+                "Tier 1 Registered Employee Template",
+                "Supplier Good Rejection Notification Template"
             ]
         ]
     ]
