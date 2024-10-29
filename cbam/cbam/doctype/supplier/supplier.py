@@ -9,7 +9,6 @@ from frappe.utils import cstr
 from frappe import _
 class Supplier(Document):
 	def before_insert(self):
-		
 		self.sub_supplier()
 		self.add_doc_name_as_supplier_number()
 
@@ -29,7 +28,6 @@ class Supplier(Document):
 
 #	def validate(self):
 #		pass
-	
 
 
 	# def after_insert(self):

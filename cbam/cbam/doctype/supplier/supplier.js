@@ -4,7 +4,7 @@
 
 frappe.ui.form.on('Supplier', {
 	refresh(frm) {
-		if(frappe.user.has_role("System Manager")){
+		if(frappe.boot.cbam.admin_role && frappe.user.has_role(frappe.boot.cbam.admin_role)){
 			frm.add_custom_button(__("Delete All Employees"), function(){
 				frappe.warn( 
 					__('Are you sure you want to proceed?'),

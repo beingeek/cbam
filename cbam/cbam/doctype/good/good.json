@@ -602,7 +602,7 @@
    "fieldname": "forward_to",
    "fieldtype": "Select",
    "label": "Forward to",
-   "mandatory_depends_on": "eval:!frappe.user.has_role(\"System Manager\")",
+   "read_only_depends_on": "eval:!frappe.user.has_role(\"System Manager\")",
    "options": "\nAnother Employee\nAnother Supplier"
   },
   {
@@ -643,7 +643,7 @@
    "link_fieldname": "supplier"
   }
  ],
- "modified": "2024-10-29 10:13:29.056587",
+ "modified": "2024-10-28 12:50:13.359560",
  "modified_by": "Administrator",
  "module": "CBAM",
  "name": "Good",

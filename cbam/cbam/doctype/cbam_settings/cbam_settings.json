@@ -5,6 +5,8 @@
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
+  "general_settings_section",
+  "admin_role",
   "emission_data_submission_details_section",
   "tier_n1_unregistered_template",
   "tier_n1_registered_template",
@@ -53,12 +55,23 @@
   {
    "fieldname": "column_break_tiem",
    "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "general_settings_section",
+   "fieldtype": "Section Break",
+   "label": "General Settings"
+  },
+  {
+   "fieldname": "admin_role",
+   "fieldtype": "Link",
+   "label": "Admin Role",
+   "options": "Role"
   }
  ],
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2024-10-24 17:38:40.036596",
+ "modified": "2024-10-29 15:19:14.582531",
  "modified_by": "Administrator",
  "module": "CBAM",
  "name": "CBAM Settings",
