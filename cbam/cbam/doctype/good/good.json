@@ -38,6 +38,13 @@
   "split_the_good_in_various_components_section",
   "manufacture",
   "good_splitted",
+  "forwarding_details_section",
+  "forward_to",
+  "forwarded_from_employee",
+  "forwarded_from_supplier",
+  "column_break_awva",
+  "forward_to_employee",
+  "forward_to_supplier",
   "1_component_section",
   "split_raw_mass_1",
   "responsibility_1",
@@ -269,6 +276,7 @@
    "fetch_from": "employee.email",
    "fieldname": "employee_email",
    "fieldtype": "Data",
+   "hidden": 1,
    "label": "Employee Email",
    "options": "Email"
   },
@@ -278,17 +286,19 @@
    "label": "Split the Good in various Components, if needed"
   },
   {
-   "default": "I am the manufacture",
+   "default": "I am able to provide the emission data of this product",
    "description": "Field can only be changed by Supplier User.",
    "fieldname": "manufacture",
    "fieldtype": "Select",
-   "label": "Manufacture",
-   "options": "I am the manufacture\nI am NOT the manufacturer of the whole amount of the product"
+   "label": "Are you the manufacturer of this product?/Can you provide the emission data for this product?",
+   "options": "I am able to provide the emission data of this product\nThe mass of this product needs to be split into several parts, due to shared responsibilities. I will assign the responsible parties\nI am not able to provide emission data and will delegate this request\nThis item was not purchased from us. I want to reject this request back to the sender.",
+   "read_only_depends_on": "eval:!frappe.user.has_role(\"System Manager\")"
   },
   {
    "default": "0",
    "fieldname": "good_splitted",
    "fieldtype": "Check",
+   "hidden": 1,
    "label": "Good Splitted",
    "read_only_depends_on": "eval:!frappe.user.has_role(\"System Manager\")"
   },
@@ -581,6 +591,49 @@
    "fieldtype": "Table",
    "label": "Good Components",
    "options": "Good Item"
+  },
+  {
+   "fieldname": "forwarding_details_section",
+   "fieldtype": "Section Break",
+   "label": "Forwarding Details",
+   "read_only_depends_on": "eval:!frappe.user.has_role(\"System Manager\")"
+  },
+  {
+   "fieldname": "forward_to",
+   "fieldtype": "Select",
+   "label": "Forward to",
+   "mandatory_depends_on": "eval:!frappe.user.has_role(\"System Manager\")",
+   "options": "\nAnother Employee\nAnother Supplier"
+  },
+  {
+   "fieldname": "forwarded_from_employee",
+   "fieldtype": "Link",
+   "label": "Forwarded from Employee",
+   "options": "Supplier Employee"
+  },
+  {
+   "fieldname": "forwarded_from_supplier",
+   "fieldtype": "Link",
+   "label": "Forwarded from Supplier",
+   "options": "Supplier"
+  },
+  {
+   "fieldname": "column_break_awva",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "forward_to_employee",
+   "fieldtype": "Link",
+   "hidden": 1,
+   "label": "Forward to Employee",
+   "options": "Supplier Employee"
+  },
+  {
+   "fieldname": "forward_to_supplier",
+   "fieldtype": "Link",
+   "hidden": 1,
+   "label": "Forward to Supplier",
+   "options": "Supplier"
   }
  ],
  "index_web_pages_for_search": 1,
@@ -590,7 +643,7 @@
    "link_fieldname": "supplier"
   }
  ],
- "modified": "2024-10-24 10:41:49.172347",
+ "modified": "2024-10-29 10:13:29.056587",
  "modified_by": "Administrator",
  "module": "CBAM",
  "name": "Good",

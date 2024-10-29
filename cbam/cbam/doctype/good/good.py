@@ -14,15 +14,33 @@ class Good(Document):
 	def before_save(self):
 		self.delete_old_employee_if_supplier_changed()
 		
-		if self.is_data_confirmed == True and self.manufacture == "I am the manufacture":
+		if self.is_data_confirmed == True and self.manufacture == "I am able to provide the emission data of this product":
 			self.status = "Done"
 		self.add_to_supplier_cht()
 		self.add_to_employee_cht()
 
 	def validate(self):
-		if self.manufacture == "I am NOT the manufacturer of the whole amount of the product" and not self.good_splitted:
+		if self.manufacture == "The mass of this product needs to be split into several parts, due to shared responsibilities. I will assign the responsible parties" and not self.good_splitted:
 			self.split_good()
+		elif self.manufacture == "I am not able to provide emission data and will delegate this request":
+			self.forward_goods()
 
+
+	def forward_goods(self):
+		
+		self.forwarded_from_employee = self.employee
+		if self.forward_to == "Another Supplier":
+			self.forwarded_from_supplier = self.supplier
+			self.supplier = self.forward_to_supplier
+			self.set_main_contact()
+			self.send_email("Another supplier is responsible")
+		else:
+			self.employee = self.forward_to_employee
+			self.send_email("Another employee is responsible")
+		self.forward_to_supplier = ""
+		self.forward_to_employee = ""
+		self.manufacture = "I am able to provide the emission data of this product"
+		self.is_data_confirmed = False
 	def on_trash(self):
 		self.delete_all_good_item()
 
@@ -34,11 +52,15 @@ class Good(Document):
 
 	def get_main_contact_employee(self):
 		if self.supplier and not self.employee:
-			supplier_doc = frappe.get_doc("Supplier", self.supplier)
-			for child in supplier_doc.employees:
-				if child.is_main_contact in ["1", 1, True]:
-					main_contact = child.employee_number
-					self.employee = main_contact
+			self.set_main_contact()
+
+
+	def set_main_contact(self):
+		supplier_doc = frappe.get_doc("Supplier", self.supplier)
+		for child in supplier_doc.employees:
+			if child.is_main_contact in ["1", 1, True]:
+				main_contact = child.employee_number
+				self.employee = main_contact
 
 	def handle_total_raw_mass(self):
 		total_raw_mass = sum(
