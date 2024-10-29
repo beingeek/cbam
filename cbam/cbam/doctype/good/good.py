@@ -18,6 +18,7 @@ class Good(Document):
 			self.status = "Done"
 		self.add_to_supplier_cht()
 		self.add_to_employee_cht()
+		self.add_to_customs_import_cht()
 
 	def validate(self):
 		if self.manufacture == "I am NOT the manufacturer of the whole amount of the product" and not self.good_splitted:
@@ -57,7 +58,7 @@ class Good(Document):
 			frappe.throw(f"The raw mass total of the components is not equal to the raw mass of the original good. <br><br> The total should be {original_raw_mass}, not {total_raw_mass}. <br><br> Please change the raw masses of the components and ensure that they add up to a total of {original_raw_mass}.")
 
 	def split_good(self):
-		self.handle_total_raw_mass()		
+		self.handle_total_raw_mass()
 		for i in range(5):
 			good_no = i+1
 			if getattr(self, f"split_raw_mass_{good_no}") > 0:
@@ -181,7 +182,7 @@ class Good(Document):
 			employee_email = frappe.db.get_value("Supplier Employee", self.employee, "email")
 			user_exists = frappe.db.exists("User", employee_email)
 			settings = frappe.get_single("CBAM Settings")
-		
+
 			if responsiblity == "Another employee is responsible":
 				template = settings.tier_1_registered_employee_template
 				if not user_exists:
@@ -193,6 +194,9 @@ class Good(Document):
 				if not user_exists:
 					create_new_supplier_user(self.employee)
 					template = settings.tier_n1_unregistered_template
+			else:
+				frappe.msgprint("Test else")
+				template = settings.tier_n1_registered_template #! Just for testing reason
 
 			notification = frappe.get_doc("Notification", template)
 			notification.send(self)
