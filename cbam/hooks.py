@@ -5,6 +5,13 @@ app_description = "Handling The EU\'s Carbon Border Adjustment Mechanism (CBABAM
 app_email = "wolfram.schmidt@phamos.eu"
 app_license = "mit"
 
+
+
+
+#update boot context
+boot_session = "cbam.boot.update_boot_context"
+
+
 # Apps
 # ------------------
 
