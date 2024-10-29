@@ -13,7 +13,7 @@ class Good(Document):
 
 	def before_save(self):
 		self.delete_old_employee_if_supplier_changed()
-		
+		self.get_main_contact_employee()
 		if self.is_data_confirmed == True and self.manufacture == "I am the manufacture":
 			self.status = "Done"
 		self.add_to_supplier_cht()
