@@ -204,7 +204,8 @@ class Good(Document):
 			self.confirmation_web_form = None
 
 	def send_email(self, responsiblity=None, employee=None):
-		if responsiblity:
+		if responsiblity and responsiblity != "I'm the responsible Person":
+			template = ""
 			employee_email = frappe.db.get_value("Supplier Employee", self.employee, "email")
 			user_exists = frappe.db.exists("User", employee_email)
 			settings = frappe.get_single("CBAM Settings")
