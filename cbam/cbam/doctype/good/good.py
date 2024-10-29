@@ -30,6 +30,9 @@ class Good(Document):
 
 	def reject_goods(self):
 		self.status = "Rejected"
+		#send email alert to the owner of good
+		self.send_email("Rejected")
+
 
 	def forward_goods(self):
 		
@@ -221,6 +224,8 @@ class Good(Document):
 				if not user_exists:
 					create_new_supplier_user(self.employee)
 					template = settings.tier_n1_unregistered_template
+			elif responsiblity == "Rejected":
+				template = settings.supplier_good_rejection_notification_template
 			else:
 				frappe.msgprint("Test else")
 				template = settings.tier_n1_registered_template #! Just for testing reason
