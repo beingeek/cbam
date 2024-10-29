@@ -72,6 +72,7 @@ class Good(Document):
 		new_good.parent_good = self.name
 		new_good.hand_over_date = self.hand_over_date
 		new_good.article_number = self.article_number
+		new_good.invoice_number = self.invoice_number
 		new_good.customs_tariff_number = self.customs_tariff_number
 		new_good.good_description = self.good_description
 		new_good.internal_customs_import_number = self.internal_customs_import_number
@@ -194,9 +195,6 @@ class Good(Document):
 				if not user_exists:
 					create_new_supplier_user(self.employee)
 					template = settings.tier_n1_unregistered_template
-			else:
-				frappe.msgprint("Test else")
-				template = settings.tier_n1_registered_template #! Just for testing reason
 
 			notification = frappe.get_doc("Notification", template)
 			notification.send(self)

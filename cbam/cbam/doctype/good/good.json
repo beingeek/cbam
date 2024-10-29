@@ -131,8 +131,7 @@
    "fieldname": "master_reference_number_mrn",
    "fieldtype": "Data",
    "in_list_view": 1,
-   "label": "Master Reference Number MRN",
-   "reqd": 1
+   "label": "Master Reference Number MRN"
   },
   {
    "description": "DE: Rechungsnummer",
@@ -590,7 +589,7 @@
    "link_fieldname": "supplier"
   }
  ],
- "modified": "2024-10-28 12:50:13.359560",
+ "modified": "2024-10-29 15:41:06.579141",
  "modified_by": "Administrator",
  "module": "CBAM",
  "name": "Good",
