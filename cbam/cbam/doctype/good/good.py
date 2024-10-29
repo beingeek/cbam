@@ -25,7 +25,11 @@ class Good(Document):
 			self.split_good()
 		elif self.manufacture == "I am not able to provide emission data and will delegate this request":
 			self.forward_goods()
+		elif self.manufacture == "This item was not purchased from us. I want to reject this request back to the sender.":
+			self.reject_goods()
 
+	def reject_goods(self):
+		self.status = "Rejected"
 
 	def forward_goods(self):
 		

@@ -100,7 +100,7 @@
    "fieldtype": "Select",
    "in_list_view": 1,
    "label": "Status",
-   "options": "Raw Data\nSent for completing\nSplit\nDone",
+   "options": "Raw Data\nSent for completing\nSplit\nDone\nRejected",
    "read_only_depends_on": "eval:!frappe.user.has_role(\"System Manager\")"
   },
   {
@@ -609,12 +609,14 @@
    "fieldname": "forwarded_from_employee",
    "fieldtype": "Link",
    "label": "Forwarded from Employee",
+   "read_only_depends_on": "eval:!frappe.user.has_role(\"System Manager\")",
    "options": "Supplier Employee"
   },
   {
    "fieldname": "forwarded_from_supplier",
    "fieldtype": "Link",
    "label": "Forwarded from Supplier",
+   "read_only_depends_on": "eval:!frappe.user.has_role(\"System Manager\")",
    "options": "Supplier"
   },
   {
@@ -682,6 +684,10 @@
   {
    "color": "Green",
    "title": "Done"
-  }
+  },
+  {
+    "color": "Red",
+    "title": "Rejected"
+   }
  ]
 }
