@@ -35,7 +35,6 @@ class Good(Document):
 
 
 	def forward_goods(self):
-		
 		self.forwarded_from_employee = self.employee
 		if self.forward_to == "Another Supplier":
 			self.forwarded_from_supplier = self.supplier
@@ -98,6 +97,7 @@ class Good(Document):
 
 	def create_new_good_doc(self, good_no):
 		new_good = frappe.new_doc("Good")
+		new_good.status = "Sent for completing"
 		new_good.parent_good = self.name
 		new_good.hand_over_date = self.hand_over_date
 		new_good.article_number = self.article_number
