@@ -138,7 +138,8 @@
    "fieldname": "master_reference_number_mrn",
    "fieldtype": "Data",
    "in_list_view": 1,
-   "label": "Master Reference Number MRN"
+   "label": "Master Reference Number MRN",
+   "reqd": 1
   },
   {
    "description": "DE: Rechungsnummer",
@@ -601,22 +602,22 @@
    "fieldname": "forward_to",
    "fieldtype": "Select",
    "label": "Forward to",
-   "read_only_depends_on": "eval:!frappe.user.has_role(\"System Manager\")",
-   "options": "\nAnother Employee\nAnother Supplier"
+   "options": "\nAnother Employee\nAnother Supplier",
+   "read_only_depends_on": "eval:!frappe.user.has_role(\"System Manager\")"
   },
   {
    "fieldname": "forwarded_from_employee",
    "fieldtype": "Link",
    "label": "Forwarded from Employee",
-   "read_only_depends_on": "eval:!frappe.user.has_role(\"System Manager\")",
-   "options": "Supplier Employee"
+   "options": "Supplier Employee",
+   "read_only_depends_on": "eval:!frappe.user.has_role(\"System Manager\")"
   },
   {
    "fieldname": "forwarded_from_supplier",
    "fieldtype": "Link",
    "label": "Forwarded from Supplier",
-   "read_only_depends_on": "eval:!frappe.user.has_role(\"System Manager\")",
-   "options": "Supplier"
+   "options": "Supplier",
+   "read_only_depends_on": "eval:!frappe.user.has_role(\"System Manager\")"
   },
   {
    "fieldname": "column_break_awva",
@@ -644,7 +645,7 @@
    "link_fieldname": "supplier"
   }
  ],
- "modified": "2024-10-29 15:41:06.579141",
+ "modified": "2024-10-30 11:48:09.742292",
  "modified_by": "Administrator",
  "module": "CBAM",
  "name": "Good",
@@ -685,8 +686,8 @@
    "title": "Done"
   },
   {
-    "color": "Red",
-    "title": "Rejected"
-   }
+   "color": "Red",
+   "title": "Rejected"
+  }
  ]
 }

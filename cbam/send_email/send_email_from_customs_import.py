@@ -15,11 +15,12 @@ def create_user_and_send_email(goods_list):
         try:
             create_new_supplier_user(employee)
             frappe.enqueue(create_email, queue='default', param1=employee)
-            frappe.db.set_value('Good', good, 'status', 'Sent for completing')
-            update_good_items(good, supplier, employee)
+            if frappe.db.get_value("Good", good, "status") == "Raw Data":
+                frappe.db.set_value('Good', good, 'status', 'Sent for completing')
             frappe.db.set_value("Supplier Employee", employee, "status", "Sent to Supplier Employee")
             is_employee_main_contact = frappe.db.get_value('Supplier Employee', employee, 'is_main_contact')
             if is_employee_main_contact:
                 frappe.db.set_value('Supplier', supplier, 'status', "Sent for confirmation")
+            update_good_items(good, supplier, employee)
         except Exception as e:
             frappe.throw(f"Couldn't send Email. Please contact the System Administrator. <br><br>Error: {e}")

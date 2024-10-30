@@ -14,11 +14,13 @@ class Good(Document):
 	def before_save(self):
 		self.delete_old_employee_if_supplier_changed()
 		self.get_main_contact_employee()
+		self.reset_status_if_employee_changed()
 		if self.is_data_confirmed == True and self.manufacture == "I am able to provide the emission data of this product":
 			self.status = "Done"
 		self.add_to_supplier_cht()
 		self.add_to_employee_cht()
 		self.add_to_customs_import_cht()
+
 
 	def validate(self):
 		if self.manufacture == "The mass of this product needs to be split into several parts, due to shared responsibilities. I will assign the responsible parties" and not self.good_splitted:
@@ -52,7 +54,6 @@ class Good(Document):
 		self.delete_all_good_item()
 
 	def delete_old_employee_if_supplier_changed(self):
-		return
 		has_supplier_changed = self.has_value_changed("supplier")
 		if has_supplier_changed and not self.is_new():
 			self.employee = None
@@ -61,6 +62,9 @@ class Good(Document):
 		if self.supplier and not self.employee:
 			self.set_main_contact()
 
+	def reset_status_if_employee_changed(self):
+		if self.has_value_changed("employee") and not self.is_new():
+			self.status = "Raw Data"
 
 	def set_main_contact(self):
 		supplier_doc = frappe.get_doc("Supplier", self.supplier)
