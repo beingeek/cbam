@@ -6,6 +6,9 @@ from frappe.model.document import Document
 
 
 class CBAMEmissionData(Document):
+	def validate(self):
+		self.validate_max_value()
+
 	def after_insert(self):
 		self.add_to_installation_cht()
 
@@ -13,6 +16,9 @@ class CBAMEmissionData(Document):
 		self.delete_child_from_installation_cht()
 		self.delete_link_in_good()
 
+	def validate_max_value(self):
+		if self.specific_direct_embedded_emissions > 20:
+			frappe.throw("Specific Direct Embedded Emissions cannot be more than 20 tonnes")
 
 	def add_to_installation_cht(self):
 		has_cbam_installation_changed = self.has_value_changed("cbam_installation")

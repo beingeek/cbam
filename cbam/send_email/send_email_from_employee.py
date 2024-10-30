@@ -6,11 +6,11 @@ import json
 
 @frappe.whitelist()
 def create_user_and_send_email(employee, supplier):
-    good_list = frappe.get_all("Good", filters={"employee": employee}, fields=["name"], pluck="name")
+    good_list = frappe.get_all("Good", filters={"employee": employee, "status": "Raw Data"}, fields=["name"], pluck="name")
     if good_list:
         try:
             create_new_supplier_user(employee)
-            #create_email(employee)
+            create_email(employee)
             frappe.db.set_value("Supplier Employee", employee, "status", "Sent to Supplier Employee")
             for good in good_list:
                 frappe.db.set_value('Good', good, 'status', 'Sent for completing')

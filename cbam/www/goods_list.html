@@ -30,6 +30,8 @@
                     <td>{{ good.good_description }}</td>
                     {% if good.status == "Raw Data" or good.status == "Sent for completing" %}
                     <td><a href="/complete-goods-data/{{ good.name }}/edit"><button>Edit</button></a></td>
+                    {% elif good.status == "Rejected" %}
+                    <td><button class="button-rejected">Rejected</button></td>
                     {% else %}
                     <td><button class="button-done">Done</button></td>
                     {% endif %}
