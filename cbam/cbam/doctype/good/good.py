@@ -55,7 +55,8 @@ class Good(Document):
 
 	def delete_old_employee_if_supplier_changed(self):
 		has_supplier_changed = self.has_value_changed("supplier")
-		if has_supplier_changed and not self.is_new():
+		is_employee_of_supplier = self.employee in frappe.get_all("Supplier Employee Item", {"parenttype": "Supplier", "parent": self.supplier, "parentfield": "employees"}, ["employee_number"], pluck="employee_number")
+		if has_supplier_changed and not is_employee_of_supplier and not self.is_new():
 			self.employee = None
 
 	def get_main_contact_employee(self):
