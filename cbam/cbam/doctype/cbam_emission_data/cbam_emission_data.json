@@ -65,10 +65,12 @@
    "mandatory_depends_on": "eval:doc.type_of_applicable_reporting_methodology==\"Other\""
   },
   {
-   "description": "Example: 1.67 tCO2/t (t = tonnes of product)",
+   "description": "Example: 1.67 tCO2/t (t = tonnes of product)<br>\nIMPORTANT: Max. 20 tonnes",
    "fieldname": "specific_direct_embedded_emissions",
-   "fieldtype": "Data",
-   "label": "Specific (direct) embedded emissions [tCO2/t]"
+   "fieldtype": "Float",
+   "label": "Specific (direct) embedded emissions [tCO2/t]",
+   "non_negative": 1,
+   "precision": "2"
   },
   {
    "fieldname": "indirect_emissions_section",
@@ -84,8 +86,10 @@
   {
    "description": "Example: 3.1 MWh/t (t = tonnes of product)",
    "fieldname": "electricity_consumed",
-   "fieldtype": "Data",
-   "label": "Electricity consumed [MWh/t]"
+   "fieldtype": "Float",
+   "label": "Electricity consumed [MWh/t]",
+   "non_negative": 1,
+   "precision": "2"
   },
   {
    "fieldname": "goods_covered_by_this_emissions_calculation_section",
@@ -134,7 +138,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-10-24 10:03:12.160836",
+ "modified": "2024-10-30 10:52:48.484071",
  "modified_by": "Administrator",
  "module": "CBAM",
  "name": "CBAM Emission Data",
