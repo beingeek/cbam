@@ -99,6 +99,7 @@
    "fieldname": "status",
    "fieldtype": "Select",
    "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Status",
    "options": "Raw Data\nSent for completing\nSplit\nDone\nRejected",
    "read_only_depends_on": "eval:!frappe.user.has_role(\"System Manager\")"
@@ -645,7 +646,7 @@
    "link_fieldname": "supplier"
   }
  ],
- "modified": "2024-10-30 11:48:09.742292",
+ "modified": "2024-10-30 14:24:44.406102",
  "modified_by": "Administrator",
  "module": "CBAM",
  "name": "Good",
