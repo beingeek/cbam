@@ -24,6 +24,7 @@ class SupplierEmployee(Document):
 	def on_update(self):
 		self.update_supplier_child()
 		self.rename()
+		self.new_main_contact()
 
 	def on_trash(self):
 		if not self.flags.is_bulk_delete:
@@ -119,3 +120,12 @@ class SupplierEmployee(Document):
 			else:
 				frappe.throw("We couldn't find to which supplier you belong to. Please contact ...")
 			self.supplier_company = supplier
+
+	def new_main_contact(self):
+		if self.has_value_changed("is_main_contact") and self.is_main_contact:
+			employees = frappe.get_all("Supplier Employee", filters={"supplier_company": self.supplier_company, "is_main_contact": 1}, fields=["name"], pluck="name")
+			employees.remove(self.name)
+			for employee in employees:
+				frappe.db.set_value("Supplier Employee", employee, "is_main_contact", 0)
+				frappe.db.set_value("Supplier Employee Item", {"employee_number": employee}, "is_main_contact", 0)
+			frappe.db.set_value("Supplier", self.supplier_company, "owner", self.email)
