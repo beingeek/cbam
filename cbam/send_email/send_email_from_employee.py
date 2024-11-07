@@ -2,7 +2,7 @@ import frappe
 from cbam.send_email.create_email import create_email
 from cbam.send_email.create_new_supplier_user import create_new_supplier_user
 from cbam.send_email.update_good_item import update_good_items
-import json
+from cbam.send_email.utils import send_email_via_notification
 
 @frappe.whitelist()
 def create_user_and_send_email(employee, supplier):
@@ -12,9 +12,7 @@ def create_user_and_send_email(employee, supplier):
             create_new_supplier_user(employee)
             # create_email(employee)
             employee_doc = frappe.get_doc("Supplier Employee", employee)
-            tier_1_request_email_notification = frappe.get_cached_value("CBAM Settings", "CBAM Settings", "tier_1_request_email")
-            notification  = frappe.get_doc("Notification", tier_1_request_email_notification)
-            notification.send(employee_doc)
+            send_email_via_notification(employee_doc)
             frappe.db.set_value("Supplier Employee", employee, "status", "Sent to Supplier Employee")
             for good in good_list:
                 frappe.db.set_value('Good', good, 'status', 'Sent for completing')
