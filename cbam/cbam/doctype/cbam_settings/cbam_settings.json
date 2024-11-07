@@ -13,7 +13,8 @@
   "supplier_good_rejection_notification_template",
   "column_break_tiem",
   "tier_1_unregistered_employee_template",
-  "tier_1_registered_employee_template"
+  "tier_1_registered_employee_template",
+  "tier_1_request_email"
  ],
  "fields": [
   {
@@ -75,12 +76,20 @@
    "fieldtype": "Link",
    "label": "Supplier Good Rejection Notification Template",
    "options": "Notification"
+  },
+  {
+   "fieldname": "tier_1_request_email",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Tier 1 Request Email",
+   "options": "Notification",
+   "reqd": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2024-10-29 15:59:18.035120",
+ "modified": "2024-11-07 14:47:19.147093",
  "modified_by": "Administrator",
  "module": "CBAM",
  "name": "CBAM Settings",
