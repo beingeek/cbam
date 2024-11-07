@@ -1,5 +1,6 @@
 import frappe
 from cbam.send_email.create_email import create_email
+from cbam.send_email.utils import send_email_via_notification
 from cbam.send_email.create_new_supplier_user import create_new_supplier_user
 from cbam.send_email.update_good_item import update_good_items
 from frappe.core.doctype.communication.email import make
@@ -11,8 +12,9 @@ def send_email(good):
     employee = frappe.db.get_value("Good", good, "employee")
     try:
         create_new_supplier_user(employee)
-        create_email(employee)
+        # create_email(employee)
         employee_doc = frappe.get_doc("Supplier Employee", employee)
+        send_email_via_notification(employee_doc)
         frappe.db.set_value("Supplier Employee", employee, "status", "Sent to Supplier Employee")
         for good in employee_doc.goods:
             if good.status == "Raw Data":

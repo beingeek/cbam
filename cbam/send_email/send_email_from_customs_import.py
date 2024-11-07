@@ -2,7 +2,7 @@ import frappe
 from cbam.send_email.create_email import create_email
 from cbam.send_email.create_new_supplier_user import create_new_supplier_user
 from cbam.send_email.update_good_item import update_good_items
-
+from cbam.send_email.utils import send_email_via_notification
 import json
 
 @frappe.whitelist()
@@ -14,7 +14,9 @@ def create_user_and_send_email(goods_list):
         employee = frappe.db.get_value("Good", good, "employee")
         try:
             create_new_supplier_user(employee)
-            frappe.enqueue(create_email, queue='default', param1=employee)
+            # frappe.enqueue(create_email, queue='default', param1=employee)
+            employee_doc = frappe.get_doc("Supplier Employee", employee)
+            send_email_via_notification(employee_doc)
             if frappe.db.get_value("Good", good, "status") == "Raw Data":
                 frappe.db.set_value('Good', good, 'status', 'Sent for completing')
             frappe.db.set_value("Supplier Employee", employee, "status", "Sent to Supplier Employee")
