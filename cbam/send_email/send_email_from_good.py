@@ -11,8 +11,11 @@ def send_email(good):
     employee = frappe.db.get_value("Good", good, "employee")
     try:
         create_new_supplier_user(employee)
-        create_email(employee)
+        # create_email(employee)
         employee_doc = frappe.get_doc("Supplier Employee", employee)
+        tier_1_request_email_notification = frappe.get_cached_value("CBAM Settings", "CBAM Settings", "tier_1_request_email")
+        notification  = frappe.get_doc("Notification", tier_1_request_email_notification)
+        notification.send(employee_doc)
         frappe.db.set_value("Supplier Employee", employee, "status", "Sent to Supplier Employee")
         for good in employee_doc.goods:
             if good.status == "Raw Data":

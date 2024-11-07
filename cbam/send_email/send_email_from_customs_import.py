@@ -14,7 +14,11 @@ def create_user_and_send_email(goods_list):
         employee = frappe.db.get_value("Good", good, "employee")
         try:
             create_new_supplier_user(employee)
-            frappe.enqueue(create_email, queue='default', param1=employee)
+            # frappe.enqueue(create_email, queue='default', param1=employee)
+            employee_doc = frappe.get_doc("Supplier Employee", employee)
+            tier_1_request_email_notification = frappe.get_cached_value("CBAM Settings", "CBAM Settings", "tier_1_request_email")
+            notification  = frappe.get_doc("Notification", tier_1_request_email_notification)
+            notification.send(employee_doc)
             if frappe.db.get_value("Good", good, "status") == "Raw Data":
                 frappe.db.set_value('Good', good, 'status', 'Sent for completing')
             frappe.db.set_value("Supplier Employee", employee, "status", "Sent to Supplier Employee")
