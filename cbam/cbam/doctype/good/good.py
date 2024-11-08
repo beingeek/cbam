@@ -29,6 +29,8 @@ class Good(Document):
 
 	def reject_goods(self):
 		self.status = "Rejected"
+		self.manufacture = ""
+		self.is_data_confirmed = 0
 		#send email alert to the owner of good
 		self.send_email("Rejected")
 
