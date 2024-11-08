@@ -4,7 +4,7 @@ app_publisher = "phamos GmbH"
 app_description = "Handling The EU\'s Carbon Border Adjustment Mechanism (CBABAM))"
 app_email = "wolfram.schmidt@phamos.eu"
 app_license = "mit"
-
+app_logo_url = "/assets/cbam/images/gallehr_partner_logo.png"
 
 
 
