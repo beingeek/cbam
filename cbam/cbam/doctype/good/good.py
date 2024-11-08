@@ -11,24 +11,21 @@ class Good(Document):
 		self.set_confirmation_web_form_to_none()
 		self.check_confirmation_checkbox()
 
-	def before_save(self):
+	def validate(self):
 		self.delete_old_employee_if_supplier_changed()
 		self.get_main_contact_employee()
 		self.reset_status_if_employee_changed()
 		if self.is_data_confirmed == True and self.manufacture == "I am able to provide the emission data of this product":
 			self.status = "Done"
-		self.add_to_supplier_cht()
-		self.add_to_employee_cht()
-		self.add_to_customs_import_cht()
-
-
-	def validate(self):
 		if self.manufacture == "The mass of this product needs to be split into several parts, due to shared responsibilities. I will assign the responsible parties" and not self.good_splitted:
 			self.split_good()
 		elif self.manufacture == "I am not able to provide emission data and will delegate this request":
 			self.forward_goods()
 		elif self.manufacture == "This item was not purchased from us. I want to reject this request back to the sender.":
 			self.reject_goods()
+		self.add_to_supplier_cht()
+		self.add_to_employee_cht()
+		self.add_to_customs_import_cht()
 
 	def reject_goods(self):
 		self.status = "Rejected"
@@ -46,10 +43,12 @@ class Good(Document):
 		else:
 			self.employee = self.forward_to_employee
 			self.send_email("Another employee is responsible")
+		self.status = "Sent for completing"
 		self.forward_to_supplier = ""
 		self.forward_to_employee = ""
 		self.manufacture = "I am able to provide the emission data of this product"
 		self.is_data_confirmed = False
+
 	def on_trash(self):
 		self.delete_all_good_item()
 
