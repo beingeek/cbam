@@ -15,6 +15,7 @@ def create_new_supplier_user(employee):
             new_user.send_welcome_email = False
             new_user.last_name = employee_doc.last_name
             new_user.first_name = employee_doc.first_name or employee_doc.last_name
+            new_user.language = "en"
             new_user.append("roles", {
                 'role': 'Supplier'
             })

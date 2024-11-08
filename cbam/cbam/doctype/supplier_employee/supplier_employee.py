@@ -128,4 +128,4 @@ class SupplierEmployee(Document):
 			for employee in employees:
 				frappe.db.set_value("Supplier Employee", employee, "is_main_contact", 0)
 				frappe.db.set_value("Supplier Employee Item", {"employee_number": employee}, "is_main_contact", 0)
-			frappe.db.set_value("Supplier", self.supplier_company, "owner", self.email)
+			# frappe.db.set_value("Supplier", self.supplier_company, "owner", self.email)

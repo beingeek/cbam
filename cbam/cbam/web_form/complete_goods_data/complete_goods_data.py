@@ -1,3 +1,4 @@
+from frappe import _
 import frappe
 
 def get_context(context):
